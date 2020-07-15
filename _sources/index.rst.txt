@@ -1,17 +1,11 @@
-.. SphinxDemo documentation master file, created by
-   sphinx-quickstart on Tue Jun 30 15:42:36 2020.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 你好
 ====
 
-这里是bob，未来在SJTU学体系结构和芯片（至少专业说明上面是这么写的），自己喜欢的
-一直还是算法（虽然很少刷题）。不管什么时候还是希望能多坚持。
+这里是bob Hi~ o(*￣▽￣*)ブ
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+
+   posts/me/me.rst
 
 好旁友们
 ========
@@ -21,27 +15,42 @@
 随笔
 ====
 
-:doc:`关于分手 <posts/essay/whatyouneed_breakup>`
+.. toctree::
+   :glob:
 
-:doc:`我和三个考研大男孩的故事 <posts/essay/whatyouneed_storywiththreeboys>`
+   posts/essay/*
+
+.. :doc:`关于分手 <posts/essay/whatyouneed_breakup>`
+
+.. :doc:`我和三个考研大男孩的故事 <posts/essay/whatyouneed_storywiththreeboys>`
 
 刷题
 =====
 
 求求自己多写点题目吧
 
-:doc:`Leetcode <posts/acm/leetcode_description>`
+.. toctree::
+   :glob:
 
-:doc:`SJTU OJ <posts/acm/sjtuoj_description>`
+   posts/acm/*
+
+.. :doc:`Leetcode <posts/acm/leetcode_description>`
+
+.. :doc:`SJTU OJ <posts/acm/sjtuoj_description>`
 
 学过的
 =======
 
-:doc:`HyperLedger Fabric <posts/learned/hyperledger-fabric_notes>`
+.. toctree::
+   :glob:
 
-:doc:`A x64 OS <posts/learned/os_notes>`
+   posts/learned/*
 
-:doc:`Dive into Deep Learning <posts/learned/dl_notes>`
+.. :doc:`HyperLedger Fabric <posts/learned/hyperledger-fabric_notes>`
+
+.. :doc:`A x64 OS <posts/learned/os_notes>`
+
+.. :doc:`Dive into Deep Learning <posts/learned/dl_notes>`
 
 想学的
 =======
