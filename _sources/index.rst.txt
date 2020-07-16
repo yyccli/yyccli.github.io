@@ -1,0 +1,68 @@
+你好
+====
+
+这里是bob Hi~ o(*￣▽￣*)ブ
+
+.. toctree::
+
+   posts/me/me.rst
+
+好旁友们
+========
+
+`Cannon & Baroque <http://aiifabbf.github.io/>`_
+
+随笔
+====
+
+.. toctree::
+   :glob:
+
+   posts/essay/*
+
+.. :doc:`关于分手 <posts/essay/whatyouneed_breakup>`
+
+.. :doc:`我和三个考研大男孩的故事 <posts/essay/whatyouneed_storywiththreeboys>`
+
+刷题
+=====
+
+求求自己多写点题目吧
+
+.. toctree::
+   :glob:
+
+   posts/acm/*
+
+.. :doc:`Leetcode <posts/acm/leetcode_description>`
+
+.. :doc:`SJTU OJ <posts/acm/sjtuoj_description>`
+
+学过的
+=======
+
+.. toctree::
+   :glob:
+
+   posts/learned/*
+
+.. :doc:`HyperLedger Fabric <posts/learned/hyperledger-fabric_notes>`
+
+.. :doc:`A x64 OS <posts/learned/os_notes>`
+
+.. :doc:`Dive into Deep Learning <posts/learned/dl_notes>`
+
+想学的
+=======
+
+一个C++编译器
+
+荔枝丹的开发板
+
+和Sphinx的恩怨
+===============
+
+.. toctree::
+   :glob:
+
+   posts/sphinx/hate
