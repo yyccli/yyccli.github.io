@@ -58,3 +58,11 @@
 一个C++编译器
 
 荔枝丹的开发板
+
+和Sphinx的恩怨
+===============
+
+.. toctree::
+   :glob:
+
+   posts/sphinx/hate
