@@ -1,9 +1,0 @@
-LeetCode
-=========
-
-Work hard on leetcode
-
-AC题目编号及解答：`Leetcode source <https://github.com/litchi-li/LeetCode>`_
-
-
-
