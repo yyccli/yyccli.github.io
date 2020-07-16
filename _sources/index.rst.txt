@@ -4,6 +4,7 @@
 这里是bob Hi~ o(*￣▽￣*)ブ
 
 .. toctree::
+   :maxdepth: 1
 
    posts/me/me.rst
 
@@ -16,6 +17,7 @@
 ====
 
 .. toctree::
+   :maxdepth: 1
    :glob:
 
    posts/essay/*
@@ -30,6 +32,7 @@
 求求自己多写点题目吧
 
 .. toctree::
+   :maxdepth: 1
    :glob:
 
    posts/acm/*
@@ -42,6 +45,7 @@
 =======
 
 .. toctree::
+   :maxdepth: 1
    :glob:
 
    posts/learned/*
@@ -63,6 +67,7 @@
 ===============
 
 .. toctree::
+   :maxdepth: 1
    :glob:
 
    posts/sphinx/hate
