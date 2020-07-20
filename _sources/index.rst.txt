@@ -37,7 +37,8 @@
    :maxdepth: 1
    :glob:
 
-   posts/acm/*
+   posts/acm/leetcode_description
+   posts/acm/sjtuoj_description
 
 .. :doc:`Leetcode <posts/acm/leetcode_description>`
 
