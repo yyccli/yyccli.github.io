@@ -3,7 +3,7 @@ SJTU OJ
 
 未来在SJTU念书，那SJTU的OJ也可以做一做
 
-AC题目编号及解答可见：`SJTU_OJ source <https://github.com/yyccli/SJTU_OJ>`_
+AC题目编号及解答：`SJTU_OJ source <https://github.com/yyccli/SJTU_OJ>`_
 
 - :ref:`1002-label`
 - :ref:`1006-label`
