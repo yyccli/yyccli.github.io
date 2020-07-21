@@ -5,7 +5,98 @@ SJTU OJ
 
 AC题目编号及解答可见：`SJTU_OJ source <https://github.com/yyccli/SJTU_OJ>`_
 
-:ref:`1006-label`
+- :ref:`1002-label`
+- :ref:`1006-label`
+
+.. _1002-label:
+
+1002.二哥种花生
+---------------
+
+题目地址 `1002`_
+
+.. _1002: https://acm.sjtu.edu.cn/OnlineJudge/problem/1002
+
+*二哥在自己的后花园里种了一些花生，也快到了收获的时候了。这片花生地是一个长度为L、宽度为W的矩形，每个单位面积上花生产量都是独立的。他想知道，对于某个指定的区域大小，在这么大的矩形区域内，花生的产量最大会是多少。*
+
+这道题理解题意之后就是一道典型的二维前缀和相关的题目。有关前缀和的相关题目与介绍可以参见：
+
+- `前缀和太好用了 <http://aiifabbf.github.io/posts/prefix-sum/index.html>`_
+
+- `前缀和的推广 <http://aiifabbf.github.io/posts/generic-prefix-sum.html>`_
+
+介绍的非常详细，并包括很多开拓的思维。
+
+题目本身很好理解，在一个二维数组中，给定一个大小，求解在该大小下数组中最大的那一块区域。
+老样子，如果是使用暴力求解，时间复杂度应该会到达 :math:`O(n^4)` ，两个外层循环遍历出所有可能
+的起始位置（也就是框定大小的左上角坐标），两个内层循环计算出该框定区域的和，最后比较大小得出结果。
+暴力解最后还是超时了。（虽然知道要超时但是还是会提交一下xD）
+
+解决办法就是在读入数据的时候构建该二维数组的二维前缀和，然后依然是两个外层循环遍历所有的起始位置，
+不过在计算每个具体的框定大小的和时只需要 :math:`O(1)` 时间，最后的时间复杂度能降到 :math:`O(n^2)` 。
+
+.. code:: C++
+
+    #include<iostream>
+    #include<memory.h>
+
+    using namespace std;
+
+    #define MAX 1001
+
+    int arr[MAX][MAX];
+    int map[MAX][MAX];
+
+    int main() {
+        
+        int l, w;
+        cin >> l >> w;
+
+        for (int i = 1; i <= l; i++) {
+            for (int j = 1; j <= w; j++) {
+                cin >> arr[i][j];
+            }
+        }
+
+        int a, b;
+        cin >> a >> b;
+
+        int m = 0;
+
+        memset(map, 0, sizeof(map));
+
+        for (int i = 1; i <= l; i++) {
+            for (int j = 1; j <= w; j++) {
+                map[i][j] = map[i - 1][j] + map[i][j - 1] - map[i - 1][j - 1] + arr[i][j];
+
+                if (i >= a && j >= b) {
+                    m = m > map[i][j] - map[i - a][j] - map[i][j - b] + map[i - a][j - b] ? m : map[i][j] - map[i - a][j] - map[i][j - b] + map[i - a][j - b];
+                }
+            }
+        }
+
+
+        //int temp;
+
+        //for (int p = 0; p < l - a + 1; p++) {
+        //	for (int q = 0; q < w - b + 1; q++) {
+        //		temp = 0;
+        //		for (int x = 0; x < a; x++) {
+        //			for (int y = 0; y < b; y++) {
+        //				temp += arr[p + x][q + y];
+        //			}
+        //		}
+
+        //		m = temp > m ? temp : m;
+        //	}
+        //}
+
+        cout << m;
+
+        return 0;
+    }
+
+裂墙推荐去看上面的链接。
 
 .. _1006-label:
 
