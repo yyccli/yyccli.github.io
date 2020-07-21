@@ -87,6 +87,29 @@
 </pre></div>
 </div>
 <p>提交结果最后还是超时了，看来需要在 <span class="math notranslate nohighlight">\(O(n)\)</span> 的方法上改进一下以满足题目的要求。</p>
+<p>2020.7.21最后还是A了这道题，也没去找别人的思路，直接在 <span class="math notranslate nohighlight">\(O(n)\)</span> 的方法上改进了：</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">solve</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="o">-</span><span class="n">INF</span><span class="p">,</span> <span class="n">dp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">predp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">predp</span> <span class="o">=</span> <span class="n">dp</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">dp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">dp</span> <span class="o">+=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="n">ans</span> <span class="o">=</span> <span class="n">dp</span> <span class="o">&gt;</span> <span class="n">ans</span> <span class="o">?</span> <span class="nl">dp</span> <span class="p">:</span> <span class="n">ans</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>
+            <span class="n">dp</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">dp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">dp</span> <span class="o">+</span> <span class="n">predp</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">ans</span> <span class="o">?</span> <span class="p">(</span><span class="n">dp</span> <span class="o">+</span> <span class="n">predp</span><span class="p">)</span> <span class="o">:</span> <span class="n">ans</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这一题的思路现在还是没法很好的系统的描述出来（但是代码能写出来），等过段时间看多了dp之后再回头
+来看。</p>
+<p>改进的主要思路是处理了可能出现 <strong>负 + 正 = 正</strong> 并做为结果的情况。例如输入[3, -6, 7]或者是
+[-2, -1, 9]这样的情况。</p>
 <p class="rubric">—————</p>
 <dl class="footnote brackets">
 <dt class="label" id="f1"><span class="brackets"><a class="fn-backref" href="#id3">1</a></span></dt>

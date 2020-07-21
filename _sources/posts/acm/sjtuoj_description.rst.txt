@@ -71,6 +71,33 @@ AC题目编号及解答可见：`SJTU_OJ source <https://github.com/yyccli/SJTU_
 
 提交结果最后还是超时了，看来需要在 :math:`O(n)` 的方法上改进一下以满足题目的要求。
 
+2020.7.21最后还是A了这道题，也没去找别人的思路，直接在 :math:`O(n)` 的方法上改进了：
+
+.. code:: C++
+
+    int solve(int *a, int len){
+        int ans = -INF, dp = 0, predp = 0;
+        for (int i = 0; i < len; i++) {
+            predp = dp;
+            if (dp > 0) {
+                dp += a[i];
+                ans = dp > ans ? dp : ans;
+            }
+            else {
+                dp = a[i];
+                if (dp > 0) {
+                    ans = (dp + predp) > ans ? (dp + predp) : ans;
+                }
+            }
+        }
+    }
+
+这一题的思路现在还是没法很好的系统的描述出来（但是代码能写出来），等过段时间看多了dp之后再回头
+来看。
+
+改进的主要思路是处理了可能出现 **负 + 正 = 正** 并做为结果的情况。例如输入[3, -6, 7]或者是
+[-2, -1, 9]这样的情况。 
+
 .. rubric:: ---------------
 
 .. [#1006-f1] 大二下学期的算法与程序设计课上，这个题也可以叫做“最大连续子序列”
