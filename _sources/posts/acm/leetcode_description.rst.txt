@@ -3,7 +3,7 @@ LeetCode
 
 Work hard on leetcode
 
-AC题目编号及解答：`Leetcode source <https://github.com/litchi-li/LeetCode>`_
+AC题目编号及解答：`Leetcode source <https://github.com/yyccli/LeetCode>`_
 
 
 
