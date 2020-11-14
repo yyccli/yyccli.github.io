@@ -36,6 +36,12 @@
             
   <div class="section" id="notes-on-hyperledger-fabric">
 <h1>Notes on HyperLedger Fabric<a class="headerlink" href="#notes-on-hyperledger-fabric" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="#notes-label"><span class="std std-ref">笔记</span></a></p></li>
+<li><p><a class="reference internal" href="#env-label"><span class="std std-ref">Fabric 1.4.x 环境配置及简单测试</span></a></p></li>
+</ul>
+<div class="section" id="notes-label">
+<span id="id1"></span><h2>笔记<a class="headerlink" href="#notes-label" title="Permalink to this headline">¶</a></h2>
 <p>在HyperLedger Fabric官方文档上的学习笔记，大部分是翻译自英文的官方文档（应该是1.4版本的文档），因为12月份又和兔子接了新的项目，所以持续更新中…</p>
 <p>blockchain – 不变的交易账本，由一个分布式对等节点网络维持。
 Bitcoin and Ethereum – 属于公共许可证区块链技术这一类，网络对任何人开放，参与者匿名交互。
@@ -218,6 +224,12 @@ FabToken是一个token管理系统允许你发行，转让，赎回token。token
 <p>Token交易流程
 无需多方组织来验证
 交易由叫做prover peers的节点来发起，服务器产生token交易之后，将交易发送至ordering服务，ordering服务将交易送至committing peer验证然后写入账本。 –2019/01/12 这是2019.5.13那段时间做的笔记。</p>
+</div>
+<div class="section" id="fabric-1-4-x">
+<span id="env-label"></span><h2>Fabric 1.4.x 环境配置及简单测试<a class="headerlink" href="#fabric-1-4-x" title="Permalink to this headline">¶</a></h2>
+<p>实际项目需求1.4.x的Fabric环境，现有的设备有一台自己的Win10笔记本电脑，一台甲方给的阿里云上的物联网平台里的CentOS7边缘计算实例（他们让我就当成一台服务器来用）。</p>
+<p>按照 <a class="reference external" href="https://hyperledger-fabric.readthedocs.io/en/release-1.4/install.html">官网教程</a> ，一些预先条件准备就绪之后（例如Git，Go，Docker，Python环境）</p>
+</div>
 </div>
 
 
