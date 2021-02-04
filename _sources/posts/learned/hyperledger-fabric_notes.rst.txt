@@ -238,6 +238,4 @@ Token交易流程
 Fabric 1.4.x 环境配置及简单测试
 -------------------------------
 
-实际项目需求1.4.x的Fabric环境，现有的设备有一台自己的Win10笔记本电脑，一台甲方给的阿里云上的物联网平台里的CentOS7边缘计算实例（他们让我就当成一台服务器来用）。
-
-按照 `官网教程 <https://hyperledger-fabric.readthedocs.io/en/release-1.4/install.html>`_ ，一些预先条件准备就绪之后（例如Git，Go，Docker，Python环境）
+后面这里交付出去了，不合并了（主要是懒
