@@ -39,6 +39,43 @@
 <h1>LeetCode<a class="headerlink" href="#leetcode" title="永久链接至标题">¶</a></h1>
 <p>Work hard on leetcode</p>
 <p>AC题目编号及解答：<a class="reference external" href="https://github.com/yyccli/LeetCode">Leetcode source</a></p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#id1"><span class="std std-ref">2021-02</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="id1">
+<span id="id2"></span><h1>2021-02<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="section" id="recover-binary-search-tree">
+<h2>99. Recover Binary Search Tree<a class="headerlink" href="#recover-binary-search-tree" title="永久链接至标题">¶</a></h2>
+<p>link <a class="reference external" href="https://leetcode.com/problems/recover-binary-search-tree/">99</a></p>
+<p>一颗二叉搜索树中恰好有两个节点交换了位置，现在想要将这棵树恢复成一颗二叉搜索树。要求一个常数空间
+复杂度的解。若先不考虑空间复杂，一颗二叉搜索树的中序遍历将会得到一个非递减序列，则现在只需要在
+这个非递减序列中找到发生了交换的两个节点，将他们在原树中交换回来（只需要换数值）即可。解法便是中序
+遍历该树的途中找到发生交换的两个节点。中序遍历可以用递归的方法来简单实现（但这样应该不是常数空间
+复杂度的解），似乎将中序遍历改写成循环就可以了（？）</p>
+</div>
+<div class="section" id="detect-capital">
+<h2>520. Detect Capital<a class="headerlink" href="#detect-capital" title="永久链接至标题">¶</a></h2>
+<p>link <a class="reference external" href="https://leetcode.com/problems/detect-capital/">520</a></p>
+<p>正则表达式的简单应用（如果不追求效率的话这题应该是考正则表达式叭？）</p>
+</div>
+<div class="section" id="combinations">
+<h2>77. Combinations<a class="headerlink" href="#combinations" title="永久链接至标题">¶</a></h2>
+<p>link <a class="reference external" href="https://leetcode.com/problems/combinations/">77</a></p>
+<p>遍历求组合数。组合和排列的生成一直都不太会…</p>
+</div>
+<div class="section" id="mutiply-strings">
+<h2>43. Mutiply Strings<a class="headerlink" href="#mutiply-strings" title="永久链接至标题">¶</a></h2>
+<p>link <a class="reference external" href="https://leetcode.com/problems/multiply-strings/">43</a></p>
+<p>两个字符串数字相乘。自己AC了一个很丑陋的版本（额外实现了两个字符串加和一个字符串乘单个字符的函数），
+后来看了答案才发现（模拟乘法的实现原来？也蛮简单的哦）</p>
+</div>
+<div class="section" id="group-anagrams">
+<h2>49. Group Anagrams<a class="headerlink" href="#group-anagrams" title="永久链接至标题">¶</a></h2>
+<p>link <a class="reference external" href="https://leetcode.com/problems/group-anagrams/">49</a></p>
+<p>这个大概叫“变位词”？要给他们归类。简单思路是两个词如果算是一个组的话，他们排序之后应该完全相等。
+用一个Map即可。</p>
+</div>
 </div>
 
 
@@ -70,6 +107,7 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">LeetCode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#id1">2021-02</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sjtuoj_description.html">SJTU OJ</a></li>
 </ul>
 <ul>
