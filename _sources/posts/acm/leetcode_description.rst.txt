@@ -10,7 +10,7 @@ AC题目编号及解答：`Leetcode source <https://github.com/yyccli/LeetCode>`
 .. _2021-02:
 
 2021-02
-=========
+--------
 
 99. Recover Binary Search Tree
 --------------------------------
