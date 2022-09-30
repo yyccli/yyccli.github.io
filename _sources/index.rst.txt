@@ -73,15 +73,3 @@ Hi
 荔枝丹的开发板
 
 秋招
-
-Log
-====
-
-.. toctree::
-   :maxdepth: 1
-   :glob:
-
-   posts/logs/log
-
-
-
