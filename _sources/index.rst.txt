@@ -6,13 +6,19 @@ Hi
 
    posts/me/me.rst
 
+   posts/disorder/disorder
+
 友情时间
 ========
+
+我的友链好多年了只有一个人qwq
 
 `Cannon & Baroque <http://aiifabbf.github.io/>`_ 很佩服的高中学长
 
 随笔
 ====
+
+不太会写作文的碎碎念
 
 .. toctree::
    :maxdepth: 1
@@ -27,7 +33,7 @@ Hi
 刷题
 =====
 
-求求自己多写点题目吧
+不太能坚持的一般刷题人，Leetcode指路： `cnliyc <https://leetcode.cn/u/cnliyc/>`_
 
 .. toctree::
    :maxdepth: 1
@@ -42,6 +48,8 @@ Hi
 
 学过的
 =======
+
+远古技术文（其实也没有什么
 
 .. toctree::
    :maxdepth: 1
@@ -66,11 +74,14 @@ Hi
 
 秋招
 
-Sphinx
-========
+Log
+====
 
 .. toctree::
    :maxdepth: 1
    :glob:
 
-   posts/sphinx/hate
+   posts/logs/log
+
+
+
