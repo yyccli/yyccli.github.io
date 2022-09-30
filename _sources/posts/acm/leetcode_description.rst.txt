@@ -1,0 +1,64 @@
+LeetCode
+=========
+
+Work hard on leetcode
+
+AC题目编号及解答：`Leetcode source <https://github.com/yyccli/LeetCode>`_
+
+- :ref:`2021-02`
+
+.. _2021-02:
+
+2021-02
+--------
+
+99. Recover Binary Search Tree
+--------------------------------
+
+link `99`_
+
+.. _99: https://leetcode.com/problems/recover-binary-search-tree/
+
+一颗二叉搜索树中恰好有两个节点交换了位置，现在想要将这棵树恢复成一颗二叉搜索树。要求一个常数空间
+复杂度的解。若先不考虑空间复杂，一颗二叉搜索树的中序遍历将会得到一个非递减序列，则现在只需要在
+这个非递减序列中找到发生了交换的两个节点，将他们在原树中交换回来（只需要换数值）即可。解法便是中序
+遍历该树的途中找到发生交换的两个节点。中序遍历可以用递归的方法来简单实现（但这样应该不是常数空间
+复杂度的解），似乎将中序遍历改写成循环就可以了（？）
+
+520. Detect Capital
+---------------------
+
+link `520`_
+
+.. _520: https://leetcode.com/problems/detect-capital/
+
+正则表达式的简单应用（如果不追求效率的话这题应该是考正则表达式叭？）
+
+77. Combinations
+-----------------
+
+link `77`_
+
+.. _77: https://leetcode.com/problems/combinations/
+
+遍历求组合数。组合和排列的生成一直都不太会...
+
+43. Mutiply Strings
+---------------------
+
+link `43`_
+
+.. _43: https://leetcode.com/problems/multiply-strings/
+
+两个字符串数字相乘。自己AC了一个很丑陋的版本（额外实现了两个字符串加和一个字符串乘单个字符的函数），
+后来看了答案才发现（模拟乘法的实现原来？也蛮简单的哦）
+
+49. Group Anagrams
+--------------------
+
+link `49`_
+
+.. _49: https://leetcode.com/problems/group-anagrams/
+
+这个大概叫“变位词”？要给他们归类。简单思路是两个词如果算是一个组的话，他们排序之后应该完全相等。
+用一个Map即可。

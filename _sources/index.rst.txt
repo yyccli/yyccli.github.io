@@ -1,0 +1,76 @@
+Hi
+===
+
+.. toctree::
+   :maxdepth: 1
+
+   posts/me/me.rst
+
+友情时间
+========
+
+`Cannon & Baroque <http://aiifabbf.github.io/>`_ 很佩服的高中学长
+
+随笔
+====
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   posts/essay/*
+
+.. :doc:`关于分手 <posts/essay/whatyouneed_breakup>`
+
+.. :doc:`我和三个考研大男孩的故事 <posts/essay/whatyouneed_storywiththreeboys>`
+
+刷题
+=====
+
+求求自己多写点题目吧
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   posts/acm/leetcode_description
+   posts/acm/sjtuoj_description
+
+.. :doc:`Leetcode <posts/acm/leetcode_description>`
+
+.. :doc:`SJTU OJ <posts/acm/sjtuoj_description>`
+
+学过的
+=======
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   posts/learned/*
+
+.. :doc:`HyperLedger Fabric <posts/learned/hyperledger-fabric_notes>`
+
+.. :doc:`A x64 OS <posts/learned/os_notes>`
+
+.. :doc:`Dive into Deep Learning <posts/learned/dl_notes>`
+
+想填的
+=======
+
+高老师的算法笔记
+
+一个C++编译器
+
+荔枝丹的开发板
+
+秋招
+
+Sphinx
+========
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   posts/sphinx/hate

@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Notes on A x64 OS &#8212; bobob</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="斯芬克斯" href="../sphinx/hate.html" />
+    <link rel="prev" title="Notes on HyperLedger Fabric" href="hyperledger-fabric_notes.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="notes-on-a-x64-os">
+<h1>Notes on A x64 OS<a class="headerlink" href="#notes-on-a-x64-os" title="Permalink to this heading">¶</a></h1>
+<p>一个64位操作系统的设计与实现（田宇著）。一年前，读过一本32位操作系统实现的书，好像叫 Orange’s ，大概看到保护模式那里就没法再看下去了（读不懂），现在出了新书，讲64位OS的实现，不管怎么样先读起来，然后慢慢记录叭~</p>
+<p><strong>notes INT 10h</strong> chapter3的第一个boot.asm里面有个清屏的操作，按照书上的代码：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mov</span> <span class="n">ax</span><span class="p">,</span> <span class="mi">0600</span><span class="n">h</span>
+<span class="n">mov</span> <span class="n">bx</span><span class="p">,</span> <span class="mi">0700</span><span class="n">h</span>
+<span class="n">mov</span> <span class="n">cx</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">mov</span> <span class="n">dx</span><span class="p">,</span> <span class="mi">0184</span><span class="n">h</span>
+<span class="nb">int</span> <span class="mi">10</span><span class="n">h</span>
+</pre></div>
+</div>
+<p>实现不了鸭（指如果运行在bochs里的话）。<code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">10h</span></code> 主要是实现屏幕指定矩形区域的文字向上滚动的功能。若 <code class="docutils literal notranslate"><span class="pre">al</span></code> 设置成 <code class="docutils literal notranslate"><span class="pre">00h</span></code> 的话，是整个矩形区域的全体文字全部上移，所以书上说的若 <code class="docutils literal notranslate"><span class="pre">al</span></code> 设置成 <code class="docutils literal notranslate"><span class="pre">00h</span></code> 后面的几个参数都不需要管应该是不对的？（我的理解是至少要设置矩形区域的大小能够超过bochs显示的大小，然后把文字都向上移走，这样就实现了清屏的效果），我的代码如下所示：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mov</span> <span class="n">ax</span><span class="p">,</span> <span class="mi">0600</span><span class="n">h</span>
+<span class="n">mov</span> <span class="n">bx</span><span class="p">,</span> <span class="mi">0700</span><span class="n">h</span>
+<span class="n">mov</span> <span class="n">cx</span><span class="p">,</span> <span class="mi">0000</span><span class="n">h</span>
+<span class="n">mov</span> <span class="n">dx</span><span class="p">,</span> <span class="mi">0</span><span class="n">ffffh</span>
+<span class="nb">int</span> <span class="mi">10</span><span class="n">h</span>
+</pre></div>
+</div>
+<p>这里 <code class="docutils literal notranslate"><span class="pre">bx</span></code> 设置区域属性的背景都是黑色的，<code class="docutils literal notranslate"><span class="pre">cx</span></code> 设置矩形左上角坐标，<code class="docutils literal notranslate"><span class="pre">dx</span></code> 设置矩形右下角坐标，我给设置成了最大的 <code class="docutils literal notranslate"><span class="pre">0ffffh</span></code> ，因为我也不知道这个bochs的窗口到底是多大，先放最大的可以偷懒。 T^T</p>
+<p><strong>mistake?</strong> p45求根目录占用的扇区数，根据书中所给数据所列出来的式子是算不到14个扇区这个结果的，但是按照</p>
+<div class="math notranslate nohighlight">
+\[根目录扇区数 = (根目录中的表项数 * 表项所占字节数) / 512\]</div>
+<p>这个公式算出来确实是14（怀疑是公式列错了）。</p>
+<p><strong>notes LBA and CHS</strong> LBA - Logical Block Addressing，CHS - Cylinder-Head-Sector。逻辑块寻址和柱面/磁头/扇区格式的磁盘扇区号之间的转换。LBA格式的很好理解应该，逻辑寻址，所以扇区号就从0开始递增就可以了。关键是柱面/磁头/扇区格式的扇区号是怎么排的。首先，磁盘会有好多个盘面，每个盘面就有点像一张光盘，然后有很多张“光盘”叠起来，每个盘面分成很多个同心圆，每个圆就叫一个 <strong>磁道</strong> ，那因为有很多个盘面叠加，所以每个盘面上同样位置的磁道，在空间上面就好像组成了一个圆柱，每个盘面的相同位置的同心圆叠加一起形成的面叫做 <strong>柱面</strong> ，每一个磁道会分成很多个段，每个段就叫一个 <strong>扇区</strong> （老式的磁盘，每一个磁道所存储的数据量是一致的，这样的话越是外围的磁道密度就会越小，因为它的周长长，相反越是内部的磁道密度就会越大）。最后还有一个磁头的概念，假设我现在要开始读取一个磁道上面的内容，那就是有一个磁头，转过这个磁道的一圈，就算读取了一个磁道，那从哪个地方开始读，就是 <strong>磁头</strong> 的位置。</p>
+<p>每个盘面都有两个面，每个面都可以存储数据，所以一个盘面应该有两个 <strong>磁头</strong> （上下两个）。一个盘面有多少个磁道整个磁盘就有多少个 <strong>柱面</strong> （这个应该也很好理解）。假设盘面的计数是从底下向上的，那最底下的盘，就有0号（在下面）和1号（在上面）两个盘面，这样的话，其实就是有0号和1号这两个磁头。柱面的计数是从外部向内部计数，最外面的柱面记为0，然后向里面递增。最后就是从磁头开始，转过一圈磁道，那从磁头开始，就是1号扇区，然后递增转完一圈（CHS计数里面柱面和磁头都是从0开始，好像唯独每个磁道的扇区是从1开始算的）。以书上那个1.44M的软盘算的话，设置一个磁道有18个扇区。举例：按照CHS如果是 0/0/12 这个扇区那就是，0号柱面，也就是最外面那个柱面的，0号磁头，那就是最下面那个盘面的下面的12号扇区，那就是从磁头开始转到第12个扇区。这个扇区对应的LBA扇区号就应该是11号（LBA是从0开始计数的）。如果是0/0/18，这个扇区表示的是0号柱面的0号磁头的最后一个扇区，对应LBA应该为17。0/1/1表示是还是0号柱面，但是是1号磁头，也就是变成了最底下那个盘的上面那个面， （括号内废弃，因为我rst没找到删除线标记哎quq。然后是那个面的最外面那个磁道（因为柱面是0）的第一个扇区，对应的LBA应该为18这里是划掉的是我自己理解上面出错了，所谓的柱面号，理解成磁道号或许好一点，这一个代表的是CHS里面的那个H的数值，所谓的磁头号，反而是代表了是哪一个盘面，我感觉下面那个我自己写的公式里的字母的表述好像有点倒了…）所以这样的话CHS的变化就是，先把0号整个柱面都用完，那这个柱面会有很多个盘面组成，其中每个盘面都会提供两个面，也就是两个磁头。接着就从最下面的那个磁头开始，转一圈就算用完了这个面。然后换上面那个面（也就是上面那个磁头），再继续…这样的话，第一个柱面用完了，之后就有点像整个磁头都向里面缩进一个磁道，然后再开始…，再开始的时候就是1号柱面了，得到了这样的关系就能得出LBA和CHS之间的换算关系。</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}LBA = ((c * hpc) + h) * sph + (s - 1)\\c = LBA / (hpc * spt)\\h = (LBA / spt) mod hpc\\s = (LBA mod spt) + 1\end{aligned}\end{align} \]</div>
+<p>其中 <cite>c</cite> ， <cite>h</cite> 和 <cite>s</cite> 分别代表柱面号，磁头号和扇区号， <cite>hpc</cite> 和 <cite>sph</cite> 分别代表每柱面拥有的磁头数和每磁头（或者说每磁道）拥有的扇区数。 <cite>sph</cite> 写作 <cite>spt</cite> 或许更好（wiki上是 <cite>spt</cite> ）。</p>
+<p><strong>mistake?</strong> 555我感觉书上的46页3-1的LBA转换为CHS的公式好像也没有写对。QuQ 噢，对不起，没有错，好像是一种不同的计算方法，我仔细看看先。<strong>Here!</strong> 在这里解释上面划掉的和书上的那个公式。（括号内废弃。书上的公式表示的 x面/x道/x扇区指的是第x个盘面的第x个磁道上的第x个扇区。这个和我上面写的区别在哪里呢，我上面的那个CHS是指第 <cite>c</cite> 个柱面（也就是第 <cite>c</cite> 个磁道）的第 <cite>h</cite> 个磁头（也就是哪个盘面）的第 <cite>s</cite> 个扇区。如果写的通顺一点那就是，第 <cite>h</cite> 个磁头（哪个盘面）上的第 <cite>c</cite> 个磁道（柱面）上的第 <cite>s</cite> 个扇区。如果我的理解正确的话，那么书上的那个x面/x道/x扇区是不符合CHS的原本的意思的。但是这两种意思都遵循同样的计算规则，也就是我上面最后说的：一定是先把一个柱面的磁道全部用完，然后再去用里面的磁道。最后，哎等等？那按照书上的写法写到INT 13h里面去是能找到的，岂不是我看的CHS的计算规则不是INT 13h采用的？？？）好了好了，都是一样的，（我大概是受到了一篇CSDN博客的影响，<a class="reference external" href="https://blog.csdn.net/pi408637535/article/details/38464491">链接</a>）来梳理一下书上的公式。首先用LBA除以每磁道扇区数（即spt），得到商Q和余数R，将商Q右移1位得到 <cite>c</cite> 的值（也就是说，把Q除以2，因为1.44的软盘hpc就是2，所以得到的 <cite>c</cite> 就是通过我们的公式算出来的，只是说计算的顺序不太一样），然后这里需要贴一下书上写的一个代码，是读取一个扇区的函数 <code class="docutils literal notranslate"><span class="pre">Func_ReadOneSector</span></code> 的片段:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">div</span> <span class="n">bl</span>
+<span class="n">inc</span> <span class="n">ah</span>
+<span class="n">mov</span> <span class="n">cl</span><span class="p">,</span> <span class="n">ah</span>
+<span class="n">mov</span> <span class="n">dh</span><span class="p">,</span> <span class="n">al</span>
+<span class="n">shr</span> <span class="n">al</span><span class="p">,</span> <span class="mi">1</span>
+<span class="n">mov</span> <span class="n">ch</span><span class="p">,</span> <span class="n">al</span>
+<span class="ow">and</span> <span class="n">dh</span><span class="p">,</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>先说#s，#s的值就是R+1，这个应该没什么好说的，根据上面写的公式还有书上的计算顺序就很容易看出来了。重点是在1.44M下这个#h也就是磁头号的求法。下班了也没搞懂为什么#h就是Q… 啊啊啊啊啊，这个我感觉是书上真的写错了，书上写的商Q就是磁头号喔，但是代码上面却有这一句 <code class="docutils literal notranslate"><span class="pre">and</span> <span class="pre">dh，</span> <span class="pre">1</span></code> ， <code class="docutils literal notranslate"><span class="pre">dh</span></code> 在INT 13h里面就是代表的磁头号，说明要将商Q和1做与，结果就是磁头号。<strong>敲黑板！</strong> 和1做与，是和0001与，不是1111，5555… （讲道理按照公式应该是要mod 2，mod 2和 和1做与 是一样的结果鸭，神奇的数学…）</p>
+<p>？？？后面这个Loader是认真的？这是人能看懂的吗？</p>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Orchid</a></h1>
+
+
+
+<p class="blurb">一只小懒虫</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../me/me.html">我</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../essay/covid-19.html">疫情下的封校生活</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../essay/something_graduation.html">毕业了</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../essay/whatyouneed_breakup.html">分手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../essay/whatyouneed_storywiththreeboys.html">我和三个考研大男孩的故事</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../acm/leetcode_description.html">LeetCode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acm/sjtuoj_description.html">SJTU OJ</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="dl_notes.html">Notes on Dive into Deep Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hyperledger-fabric_notes.html">Notes on HyperLedger Fabric</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Notes on A x64 OS</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx/hate.html">斯芬克斯</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="hyperledger-fabric_notes.html" title="previous chapter">Notes on HyperLedger Fabric</a></li>
+      <li>Next: <a href="../sphinx/hate.html" title="next chapter">斯芬克斯</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Bob.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.2.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/posts/learned/os_notes.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
