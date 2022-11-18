@@ -6,7 +6,7 @@ Hi
 
    posts/me/me.rst
 
-   posts/disorder/disorder
+   .. posts/disorder/disorder
 
 友情时间
 ========
